@@ -1,0 +1,98 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="es">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Gestor de Horarios - Universidad del Norte</title>\
+    <link rel="stylesheet" href="styles/style.css">\
+</head>\
+<body>\
+    <header>\
+        <img src="images/uninorte-logo.png" alt="Universidad del Norte" class="logo">\
+        <h1>Gestor de Horarios - Universidad del Norte</h1>\
+    </header>\
+\
+    <main>\
+        <section class="formulario">\
+            <h2>Ingresar Nueva Clase</h2>\
+            <form id="form-horario">\
+                <label for="dia">D\'eda:</label>\
+                <select id="dia" name="dia" required>\
+                    <option value="">Selecciona</option>\
+                    <option value="Lunes">Lunes</option>\
+                    <option value="Martes">Martes</option>\
+                    <option value="Mi\'e9rcoles">Mi\'e9rcoles</option>\
+                    <option value="Jueves">Jueves</option>\
+                    <option value="Viernes">Viernes</option>\
+                    <option value="S\'e1bado">S\'e1bado</option>\
+                </select>\
+\
+                <label for="materia">Nombre de la materia:</label>\
+                <input type="text" id="materia" name="materia" required>\
+\
+                <label for="docente">Docente:</label>\
+                <input type="text" id="docente" name="docente">\
+\
+                <label for="horaInicio">Hora inicio (ej: 10:30 a.\uc0\u8239 m.):</label>\
+                <input type="text" id="horaInicio" name="horaInicio" required>\
+\
+                <label for="horaFin">Hora fin (ej: 12:30 p.\uc0\u8239 m.):</label>\
+                <input type="text" id="horaFin" name="horaFin" required>\
+\
+                <label for="salon">Sal\'f3n:</label>\
+                <input type="text" id="salon" name="salon">\
+\
+                <button type="submit">Agregar Clase</button>\
+            </form>\
+            <div id="mensaje-exito"></div>\
+        </section>\
+\
+        <section class="horario" id="horario-usuario">\
+            <h2>Horario Ingresado</h2>\
+            <!-- Aqu\'ed se agregan las clases ingresadas -->\
+        </section>\
+    </main>\
+\
+    <footer>\
+        <p>&copy; 2025 Universidad del Norte - Barranquilla, Colombia</p>\
+        <p>Contacto: info@uninorte.edu.co</p>\
+    </footer>\
+\
+    <script>\
+        const form = document.getElementById("form-horario");\
+        const horarioUsuario = document.getElementById("horario-usuario");\
+        const mensajeExito = document.getElementById("mensaje-exito");\
+\
+        form.addEventListener("submit", function(event) \{\
+            event.preventDefault();\
+\
+            const dia = form.dia.value;\
+            const materia = form.materia.value;\
+            const docente = form.docente.value;\
+            const horaInicio = form.horaInicio.value;\
+            const horaFin = form.horaFin.value;\
+            const salon = form.salon.value;\
+\
+            const claseHTML = `\
+                <div class="dia">\
+                    <h3>$\{dia\}</h3>\
+                    <p><strong>$\{materia\}</strong> ($\{horaInicio\} \'96 $\{horaFin\}) $\{salon ? '- ' + salon : ''\}</p>\
+                    $\{docente ? '<p><em>Docente:</em> ' + docente + '</p>' : ''\}\
+                </div>\
+            `;\
+\
+            horarioUsuario.insertAdjacentHTML("beforeend", claseHTML);\
+            mensajeExito.textContent = "Clase agregada correctamente.";\
+            form.reset();\
+        \});\
+    </script>\
+</body>\
+</html>\
+}
